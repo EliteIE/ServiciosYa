@@ -1,0 +1,1252 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servicios Ya - Innovación Digital para La Rioja</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #0066cc;
+            --primary-orange: #ff6b35;
+            --text-dark: #1a1a1a;
+            --text-light: #666;
+            --bg-light: #f8f9fa;
+            --white: #ffffff;
+            --gray-100: #f5f5f5;
+            --gray-200: #e5e5e5;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--white);
+            overflow-x: hidden;
+        }
+
+        /* Hero Institucional */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, #004499 100%);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 70%, rgba(255,255,255,0.1) 0%, transparent 50%);
+            animation: hero-subtle 20s ease-in-out infinite;
+        }
+
+        @keyframes hero-subtle {
+            0%, 100% { transform: translate(0, 0); opacity: 0.3; }
+            50% { transform: translate(-30px, -30px); opacity: 0.5; }
+        }
+
+        .hero-content {
+            text-align: center;
+            color: white;
+            z-index: 2;
+            padding: 40px;
+            max-width: 1000px;
+            animation: hero-appear 1.5s ease-out;
+        }
+
+        @keyframes hero-appear {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .logo-modern {
+            width: 140px;
+            height: 140px;
+            margin: 0 auto 40px;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255,255,255,0.2);
+            border-radius: 25px;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            animation: logo-float 4s ease-in-out infinite;
+        }
+
+        @keyframes logo-float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .logo-cell {
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            backdrop-filter: blur(10px);
+        }
+
+        h1 {
+            font-size: 72px;
+            font-weight: 900;
+            margin-bottom: 20px;
+            letter-spacing: -2px;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Secciones */
+        .section {
+            padding: 120px 40px;
+            margin-bottom: 20px;
+            background: var(--white);
+            position: relative;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .section.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-dark {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: white;
+        }
+
+        /* Títulos */
+        h2 {
+            font-size: 48px;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 20px;
+            color: var(--primary-blue);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease 0.2s;
+        }
+
+        .section.animate h2 {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-dark h2 {
+            color: var(--primary-orange);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 20px;
+            color: var(--text-light);
+            margin-bottom: 60px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease 0.4s;
+        }
+
+        .section.animate .section-subtitle {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-dark .section-subtitle {
+            color: rgba(255,255,255,0.8);
+        }
+
+        /* Estadísticas */
+        .stats-modern {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin: 60px 0;
+        }
+
+        .stat-modern {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-left: 4px solid var(--primary-orange);
+            opacity: 0;
+            transform: translateY(30px) scale(0.95);
+            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .section.animate .stat-modern {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .stat-modern:nth-child(1) { transition-delay: 0.1s; }
+        .stat-modern:nth-child(2) { transition-delay: 0.2s; }
+        .stat-modern:nth-child(3) { transition-delay: 0.3s; }
+        .stat-modern:nth-child(4) { transition-delay: 0.4s; }
+
+        .stat-modern:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .stat-number {
+            font-size: 56px;
+            font-weight: 900;
+            color: var(--primary-orange);
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        /* Cards de objetivos */
+        .objectives-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 60px 0;
+        }
+
+        .objective-card {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 1px solid var(--gray-200);
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .section.animate .objective-card {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .objective-card:nth-child(1) { transition-delay: 0.1s; }
+        .objective-card:nth-child(2) { transition-delay: 0.2s; }
+        .objective-card:nth-child(3) { transition-delay: 0.3s; }
+        .objective-card:nth-child(4) { transition-delay: 0.4s; }
+        .objective-card:nth-child(5) { transition-delay: 0.5s; }
+        .objective-card:nth-child(6) { transition-delay: 0.6s; }
+
+        .objective-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+            border-color: var(--primary-blue);
+        }
+
+        .objective-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--primary-blue);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            margin-bottom: 25px;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .objective-card:hover .objective-icon {
+            background: var(--primary-orange);
+            transform: scale(1.1);
+        }
+
+        /* Glass cards para sección oscura */
+        .glass-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 15px;
+            padding: 40px;
+            margin: 20px 0;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .section.animate .glass-card {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .glass-card:nth-child(1) { transition-delay: 0.1s; }
+        .glass-card:nth-child(2) { transition-delay: 0.2s; }
+        .glass-card:nth-child(3) { transition-delay: 0.3s; }
+
+        /* Cards de impacto */
+        .impact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 60px 0;
+        }
+
+        .impact-card {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-top: 4px solid var(--primary-blue);
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .section.animate .impact-card {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .impact-card:nth-child(1) { transition-delay: 0.1s; }
+        .impact-card:nth-child(2) { transition-delay: 0.2s; }
+        .impact-card:nth-child(3) { transition-delay: 0.3s; }
+
+        .impact-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .impact-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        /* Lista moderna */
+        .modern-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .modern-list li {
+            background: var(--white);
+            margin: 15px 0;
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 4px solid var(--primary-orange);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: all 0.6s ease;
+        }
+
+        .section.animate .modern-list li {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .modern-list li:nth-child(1) { transition-delay: 0.1s; }
+        .modern-list li:nth-child(2) { transition-delay: 0.2s; }
+        .modern-list li:nth-child(3) { transition-delay: 0.3s; }
+        .modern-list li:nth-child(4) { transition-delay: 0.4s; }
+
+        .modern-list li:hover {
+            transform: translateX(10px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+        }
+
+        /* Cards de capacidades */
+        .capabilities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 60px 0;
+        }
+
+        .capability-card {
+            background: var(--white);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border-left: 4px solid var(--primary-blue);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .section.animate .capability-card {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .capability-card:nth-child(1) { transition-delay: 0.1s; }
+        .capability-card:nth-child(2) { transition-delay: 0.2s; }
+        .capability-card:nth-child(3) { transition-delay: 0.3s; }
+
+        .capability-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+
+        /* Boxes destacados */
+        .highlight-box {
+            background: var(--bg-light);
+            border-radius: 20px;
+            padding: 50px;
+            margin: 40px 0;
+            border: 2px solid var(--gray-200);
+            opacity: 0;
+            transform: scale(0.95);
+            transition: all 0.8s ease;
+        }
+
+        .section.animate .highlight-box {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* CTA */
+        .cta-modern {
+            background: var(--primary-blue);
+            color: white;
+            padding: 100px 40px;
+            text-align: center;
+            border-radius: 20px;
+            margin: 60px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-modern::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 20px 50px;
+            background: var(--primary-orange);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 30px;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(255,107,53,0.4);
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            h1 { font-size: 48px; }
+            h2 { font-size: 36px; }
+            .stats-modern, .objectives-grid, .impact-grid, .capabilities-grid {
+                grid-template-columns: 1fr;
+            }
+            .section { padding: 80px 20px; }
+        }
+
+        @media (max-width: 640px) {
+            .section { padding: 60px 20px; }
+            h1 { font-size: 36px; }
+            h2 { font-size: 28px; }
+        }
+
+        /* Parallax suave */
+        .parallax-element {
+            transition: transform 0.1s ease-out;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="logo-modern">
+                <div class="logo-cell">🔧</div>
+                <div class="logo-cell">🔑</div>
+                <div class="logo-cell">🔨</div>
+                <div class="logo-cell">⚡</div>
+            </div>
+            <h1>SERVICIOS YA</h1>
+            <p style="font-size: 28px; margin-bottom: 20px; opacity: 0.95;">
+                Generación de Empleo • Desarrollo Regional • Innovación Social
+            </p>
+            <p style="font-size: 20px; opacity: 0.8;">
+                Una Oportunidad Estratégica para La Rioja • 2025
+            </p>
+        </div>
+    </section>
+
+    <div class="container">
+
+        <!-- Visión General del Proyecto -->
+        <section class="section">
+            <h2>Visión General del Proyecto</h2>
+            <p class="section-subtitle">
+                Servicios Ya identifica y aprovecha una oportunidad única en el mercado riojano: 
+                la creación de empleos formales en el sector de servicios técnicos especializados
+            </p>
+            
+            <div class="stats-modern">
+                <div class="stat-modern">
+                    <div class="stat-number">198K</div>
+                    <div style="font-size: 20px; font-weight: 600; margin-bottom: 10px; color: var(--primary-blue);">Viviendas en la Región</div>
+                    <p style="color: var(--text-light);">Mercado potencial sin atender</p>
+                </div>
+                <div class="stat-modern">
+                    <div class="stat-number">7%</div>
+                    <div style="font-size: 20px; font-weight: 600; margin-bottom: 10px; color: var(--primary-blue);">Tasa de Desempleo</div>
+                    <p style="color: var(--text-light);">Oportunidad de crear empleos</p>
+                </div>
+                <div class="stat-modern">
+                    <div class="stat-number">15%</div>
+                    <div style="font-size: 20px; font-weight: 600; margin-bottom: 10px; color: var(--primary-blue);">Jóvenes Sin Empleo</div>
+                    <p style="color: var(--text-light);">Talento disponible para integrar</p>
+                </div>
+                <div class="stat-modern">
+                    <div class="stat-number">0</div>
+                    <div style="font-size: 20px; font-weight: 600; margin-bottom: 10px; color: var(--primary-blue);">Empresa Líder</div>
+                    <p style="color: var(--text-light);">En multiservicios profesionales</p>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <h3 style="color: var(--primary-blue); margin-bottom: 20px; text-align: center; font-size: 24px;">
+                    La Oportunidad Perfecta
+                </h3>
+                <p style="text-align: center; font-size: 18px; line-height: 1.8;">
+                    <strong>Servicios Ya</strong> surge en el momento ideal: existe una demanda creciente de servicios técnicos 
+                    especializados y, simultáneamente, profesionales capacitados buscando oportunidades de empleo formal. 
+                    Nuestro proyecto conecta ambas necesidades, creando valor económico y social para La Rioja.
+                </p>
+            </div>
+        </section>
+
+        <!-- Principales Objetivos -->
+        <section class="section">
+            <h2>Principales Objetivos</h2>
+            <p class="section-subtitle">
+                Estrategia integral de desarrollo socioeconómico a través de la generación de empleo formal
+            </p>
+            
+            <div class="objectives-grid">
+                <div class="objective-card">
+                    <div class="objective-icon">💼</div>
+                    <h3 style="color: var(--primary-blue); margin-bottom: 15px; font-size: 20px;">
+                        Crear Empleos Formales de Calidad
+                    </h3>
+                    <p style="color: var(--text-light); line-height: 1.8;">
+                        Generar oportunidades laborales estables y bien remuneradas para técnicos especializados, 
+                        ofreciendo beneficios sociales y un ambiente de trabajo profesional.
+                    </p>
+                </div>
+                <div class="objective-card">
+                    <div class="objective-icon">📱</div>
+                    <h3 style="color: var(--primary-blue); margin-bottom: 15px; font-size: 20px;">
+                        Facilitar el Acceso Digital a Servicios
+                    </h3>
+                    <p style="color: var(--text-light); line-height: 1.8;">
+                        Revolucionar la forma de acceder a servicios técnicos: tan fácil como "pedir una hamburguesa". 
+                        A través de nuestra aplicación móvil, los riojanos podrán solicitar servicios profesionales 
+                        de manera rápida, segura y con garantía de calidad.
+                    </p>
+                </div>
+                <div class="objective-card">
+                    <div class="objective-icon">🏠</div>
+                    <h3 style="color: var(--primary-blue); margin-bottom: 15px; font-size: 20px;">
+                        Atender la Demanda con Tecnología
+                    </h3>
+                    <p style="color: var(--text-light); line-height: 1.8;">
+                        Cubrir la necesidad de servicios técnicos profesionales con un sistema de gestión 
+                        de calidad integrado, tracking en tiempo real y evaluación continua del servicio.
+                    </p>
+                </div>
+                <div class="objective-card">
+                    <div class="objective-icon">📈</div>
+                    <h3 style="color: var(--primary-blue); margin-bottom: 15px; font-size: 20px;">
+                        Estimular la Capacitación Técnica
+                    </h3>
+                    <p style="color: var(--text-light); line-height: 1.8;">
+                        Al crear empleos reales y atractivos, incentivamos que más personas 
+                        se capaciten técnicamente, generando un círculo virtuoso de desarrollo profesional.
+                    </p>
+                </div>
+                <div class="objective-card">
+                    <div class="objective-icon">🌟</div>
+                    <h3 style="color: var(--primary-blue); margin-bottom: 15px; font-size: 20px;">
+                        Profesionalizar el Sector
+                    </h3>
+                    <p style="color: var(--text-light); line-height: 1.8;">
+                        Elevar los estándares de calidad y profesionalismo en servicios técnicos, 
+                        beneficiando tanto a trabajadores como a la comunidad en general.
+                    </p>
+                </div>
+                <div class="objective-card">
+                    <div class="objective-icon">⚡</div>
+                    <h3 style="color: var(--primary-blue); margin-bottom: 15px; font-size: 20px;">
+                        Innovar en Gestión de Calidad
+                    </h3>
+                    <p style="color: var(--text-light); line-height: 1.8;">
+                        Implementar tecnología de vanguardia para monitoreo de calidad, 
+                        seguimiento de servicios y satisfacción del cliente, garantizando 
+                        excelencia en cada intervención técnica.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cambios Sociales Esperados -->
+        <section class="section section-dark">
+            <h2>Cambios Sociales Esperados</h2>
+            <p class="section-subtitle">
+                Impacto transformador en múltiples dimensiones del desarrollo comunitario
+            </p>
+            
+            <div class="impact-grid">
+                <div class="glass-card">
+                    <div class="impact-icon">👨‍💼</div>
+                    <h3 style="margin-bottom: 15px; font-size: 20px;">Dignificación del Trabajo Técnico</h3>
+                    <p style="opacity: 0.9; line-height: 1.8;">
+                        Los profesionales técnicos tendrán acceso a empleos formales con salarios justos, 
+                        beneficios sociales y oportunidades de crecimiento, elevando su estatus profesional y calidad de vida.
+                    </p>
+                </div>
+                <div class="glass-card">
+                    <div class="impact-icon">🤝</div>
+                    <h3 style="margin-bottom: 15px; font-size: 20px;">Fortalecimiento del Tejido Social</h3>
+                    <p style="opacity: 0.9; line-height: 1.8;">
+                        La creación de empleos de calidad contribuye a la estabilidad familiar y comunitaria, 
+                        reduciendo la migración y fortaleciendo las raíces locales de los trabajadores.
+                    </p>
+                </div>
+                <div class="glass-card">
+                    <div class="impact-icon">📊</div>
+                    <h3 style="margin-bottom: 15px; font-size: 20px;">Dinamización Económica Local</h3>
+                    <p style="opacity: 0.9; line-height: 1.8;">
+                        Los empleos formales incrementan el poder adquisitivo de las familias, 
+                        impulsando el consumo local y beneficiando a comercios y servicios de la región.
+                    </p>
+                </div>
+            </div>
+
+            <div style="background: rgba(255,255,255,0.05); border-radius: 15px; padding: 40px; margin-top: 40px; border: 1px solid rgba(255,255,255,0.1);">
+                <h3 style="text-align: center; margin-bottom: 30px; font-size: 24px;">Efecto Multiplicador</h3>
+                <div class="stats-modern">
+                    <div class="glass-card">
+                        <div class="stat-number">60+</div>
+                        <div style="font-size: 18px; font-weight: 600;">Empleos Directos Proyectados</div>
+                        <p style="opacity: 0.8;">En el primer año de operación</p>
+                    </div>
+                    <div class="glass-card">
+                        <div class="stat-number">450+</div>
+                        <div style="font-size: 18px; font-weight: 600;">Beneficiarios Indirectos</div>
+                        <p style="opacity: 0.8;">Familias y proveedores locales</p>
+                    </div>
+                    <div class="glass-card">
+                        <div class="stat-number">5K+</div>
+                        <div style="font-size: 18px; font-weight: 600;">Servicios Anuales</div>
+                        <p style="opacity: 0.8;">Atención profesional a la comunidad</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Impacto Estimado en la Economía Local -->
+        <section class="section">
+            <h2>Impacto Estimado en la Economía Local</h2>
+            <p class="section-subtitle">
+                Análisis del efecto transformador en los sectores clave de La Rioja
+            </p>
+            
+            <div class="highlight-box">
+                <h3 style="color: var(--primary-blue); margin-bottom: 25px; text-align: center; font-size: 24px;">
+                    Sectores de Intervención Directa
+                </h3>
+                <ul class="modern-list">
+                    <li>
+                        <strong>Construcción y Mantenimiento:</strong> Incorporación de plomeros, electricistas y técnicos 
+                        especializados al mercado formal, elevando los estándares de calidad del sector.
+                    </li>
+                    <li>
+                        <strong>Servicios Especializados:</strong> Profesionalización de servicios de aire acondicionado, 
+                        limpieza y jardinería con certificaciones y garantías de calidad.
+                    </li>
+                    <li>
+                        <strong>Economía de Servicios:</strong> Creación de un nuevo segmento de mercado 
+                        de servicios técnicos profesionales que actualmente no existe de manera estructurada.
+                    </li>
+                </ul>
+            </div>
+
+            <div class="impact-grid">
+                <div class="impact-card">
+                    <div class="impact-icon">📈</div>
+                    <h3 style="color: var(--primary-blue); margin-bottom: 15px; font-size: 20px;">
+                        Incremento en Empleabilidad Técnica
+                    </h3>
+                    <p style="color: var(--text-light); line-height: 1.8;">
+                        Aumento significativo en oportunidades laborales para profesionales técnicos, 
+                        con empleos estables y bien remunerados en sectores clave de la economía local.
+                    </p>
+                </div>
+                <div class="impact-card">
+                    <div class="impact-icon">💰</div>
+                    <h3 style="color: var(--primary-blue); margin-bottom: 15px; font-size: 20px;">
+                        Circulación Económica Mejorada
+                    </h3>
+                    <p style="color: var(--text-light); line-height: 1.8;">
+                        Los salarios formales incrementan el poder adquisitivo familiar, 
+                        beneficiando directamente al comercio local y servicios de la región.
+                    </p>
+                </div>
+                <div class="impact-card">
+                    <div class="impact-icon">🏢</div>
+                    <h3 style="color: var(--primary-blue); margin-bottom: 15px; font-size: 20px;">
+                        Mejora en Productividad Regional
+                    </h3>
+                    <p style="color: var(--text-light); line-height: 1.8;">
+                        Las empresas y hogares riojanos tendrán acceso a servicios técnicos 
+                        profesionales, mejorando su eficiencia y calidad de vida.
+                    </p>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <h3 style="color: var(--primary-orange); margin-bottom: 20px; text-align: center; font-size: 24px;">
+                    Contribución al Desarrollo Regional
+                </h3>
+                <p style="text-align: center; font-size: 18px; line-height: 1.8;">
+                    Servicios Ya está posicionado para convertirse en un motor de desarrollo económico local, 
+                    creando un sector de servicios técnicos profesionales que beneficiará tanto a trabajadores 
+                    como a la comunidad en general, estableciendo nuevos estándares de calidad y profesionalismo.
+                </p>
+            </div>
+        </section>
+
+        <!-- Necesidad de Apoyo -->
+        <section class="section">
+            <h2>Necesidad de Apoyo Estratégico</h2>
+            <p class="section-subtitle">
+                Requerimientos para implementar la fase inicial del proyecto con máximo impacto social
+            </p>
+            
+            <div class="highlight-box">
+                <h3 style="font-size: 32px; color: var(--primary-orange); margin-bottom: 25px; text-align: center;">
+                    Proceso de Implementación desde el Apoyo
+                </h3>
+                <p style="font-size: 20px; margin-bottom: 40px; text-align: center; color: var(--text-light);">
+                    Enfoque escalable que permite crecimiento sostenido y impacto social inmediato
+                </p>
+                
+                <div class="capabilities-grid">
+                    <div class="capability-card" style="border-left-color: var(--primary-blue);">
+                        <strong style="color: var(--primary-blue); font-size: 18px;">Fase 1 - Arranque y Consolidación</strong>
+                        <p style="margin-top: 15px; line-height: 1.6;">
+                            <strong>20 empleos formales</strong><br>
+                            Establecimiento de infraestructura<br>
+                            Desarrollo de aplicación móvil<br>
+                            Posicionamiento en el mercado<br>
+                            <em>Construcción de base sólida y reputación</em>
+                        </p>
+                    </div>
+                    <div class="capability-card" style="border-left-color: var(--primary-orange);">
+                        <strong style="color: var(--primary-orange); font-size: 18px;">Fase 2 - Expansión de Servicios</strong>
+                        <p style="margin-top: 15px; line-height: 1.6;">
+                            <strong>45 empleos formales</strong><br>
+                            Diversificación de servicios técnicos<br>
+                            Ampliación de cobertura territorial<br>
+                            Optimización de procesos<br>
+                            <em>Crecimiento controlado según demanda</em>
+                        </p>
+                    </div>
+                    <div class="capability-card" style="border-left-color: var(--primary-blue);">
+                        <strong style="color: var(--primary-blue); font-size: 18px;">Fase 3 - Liderazgo Regional</strong>
+                        <p style="margin-top: 15px; line-height: 1.6;">
+                            <strong>69+ empleos formales</strong><br>
+                            Referencia en multiservicios técnicos<br>
+                            Tecnología consolidada<br>
+                            Modelo replicable regionalmente<br>
+                            <em>Autosustentabilidad y expansión</em>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <h3 style="color: var(--primary-blue); margin-bottom: 20px; text-align: center; font-size: 24px;">
+                    Componentes Clave del Apoyo Requerido
+                </h3>
+                <ul class="modern-list">
+                    <li>
+                        <strong>Equipamiento Técnico Especializado:</strong> Herramientas profesionales e industriales 
+                        para garantizar servicios de máxima calidad desde el primer día.
+                    </li>
+                    <li>
+                        <strong>Infraestructura Operativa:</strong> Espacios físicos, vehículos y sistemas 
+                        necesarios para la operación eficiente del proyecto.
+                    </li>
+                    <li>
+                        <strong>Capital de Trabajo Inicial:</strong> Recursos para sostener la operación 
+                        durante los primeros meses mientras se consolida la base de clientes.
+                    </li>
+                    <li>
+                        <strong>Inversión en Marketing:</strong> Posicionamiento de marca y campañas 
+                        para dar a conocer los servicios profesionales en la comunidad riojana.
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Justificación del Apoyo -->
+        <section class="section section-dark">
+            <h2>Justificación del Apoyo Estratégico</h2>
+            <p class="section-subtitle">
+                Fundamentos que respaldan la importancia del apoyo inicial para maximizar el impacto social
+            </p>
+            
+            <div class="impact-grid">
+                <div class="glass-card">
+                    <div class="impact-icon">🎯</div>
+                    <h3 style="margin-bottom: 15px; font-size: 20px;">Garantía de Sostenibilidad</h3>
+                    <p style="opacity: 0.9; line-height: 1.8;">
+                        El apoyo inicial asegura una base sólida para el proyecto, permitiendo establecer 
+                        procesos de calidad y construir una reputación confiable en el mercado desde el primer día.
+                    </p>
+                </div>
+                <div class="glass-card">
+                    <div class="impact-icon">🏆</div>
+                    <h3 style="margin-bottom: 15px; font-size: 20px;">Excelencia desde el Inicio</h3>
+                    <p style="opacity: 0.9; line-height: 1.8;">
+                        La inversión en equipamiento profesional y capacitación especializada garantiza 
+                        servicios de máxima calidad que beneficiarán directamente a la comunidad riojana.
+                    </p>
+                </div>
+                <div class="glass-card">
+                    <div class="impact-icon">❤️</div>
+                    <h3 style="margin-bottom: 15px; font-size: 20px;">Impacto Social Inmediato</h3>
+                    <p style="opacity: 0.9; line-height: 1.8;">
+                        Cada recurso destinado al proyecto se traduce en empleos formales dignos 
+                        para familias riojanas, generando beneficios sociales medibles desde el primer mes.
+                    </p>
+                </div>
+                <div class="glass-card">
+                    <div class="impact-icon">🚀</div>
+                    <h3 style="margin-bottom: 15px; font-size: 20px;">Modelo Escalable y Replicable</h3>
+                    <p style="opacity: 0.9; line-height: 1.8;">
+                        El enfoque gradual permite validar el modelo, generar recursos propios 
+                        y expandir hacia otros servicios técnicos, maximizando el impacto a largo plazo.
+                    </p>
+                </div>
+            </div>
+
+            <div style="background: rgba(255,255,255,0.05); border-radius: 15px; padding: 40px; margin-top: 40px; border: 1px solid rgba(255,255,255,0.1);">
+                <h3 style="text-align: center; margin-bottom: 30px; font-size: 24px;">Beneficios del Apoyo Estratégico</h3>
+                <div class="stats-modern">
+                    <div class="glass-card">
+                        <div class="stat-number">20+</div>
+                        <div style="font-size: 18px; font-weight: 600;">Empleos Inmediatos</div>
+                        <p style="opacity: 0.8;">Fase inicial con impacto directo</p>
+                    </div>
+                    <div class="glass-card">
+                        <div class="stat-number">3X</div>
+                        <div style="font-size: 18px; font-weight: 600;">Efecto Multiplicador</div>
+                        <p style="opacity: 0.8;">Beneficio social por cada peso invertido</p>
+                    </div>
+                    <div class="glass-card">
+                        <div class="stat-number">100%</div>
+                        <div style="font-size: 18px; font-weight: 600;">Empleos Formales</div>
+                        <p style="opacity: 0.8;">Contribución al registro laboral</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Nuestras Capacidades -->
+        <section class="section">
+            <h2>Nuestras Capacidades para Ejecutar</h2>
+            <p class="section-subtitle">
+                Equipo fundador con experiencia comprobada en gestión empresarial y desarrollo de proyectos
+            </p>
+            
+            <div class="highlight-box">
+                <h3 style="color: var(--primary-blue); margin-bottom: 25px; text-align: center; font-size: 24px;">
+                    Fortalezas del Equipo Fundador
+                </h3>
+                <div class="capabilities-grid">
+                    <div class="capability-card" style="border-left-color: var(--primary-blue);">
+                        <strong style="color: var(--primary-blue); font-size: 18px;">Experiencia Empresarial</strong>
+                        <p style="margin-top: 15px; line-height: 1.6;">
+                            Conocimiento profundo en gestión operativa, recursos humanos 
+                            y desarrollo de servicios profesionales.
+                        </p>
+                    </div>
+                    <div class="capability-card" style="border-left-color: var(--primary-orange);">
+                        <strong style="color: var(--primary-orange); font-size: 18px;">Visión Social</strong>
+                        <p style="margin-top: 15px; line-height: 1.6;">
+                            Compromiso genuino con el desarrollo regional y la creación 
+                            de oportunidades laborales de calidad.
+                        </p>
+                    </div>
+                    <div class="capability-card" style="border-left-color: var(--primary-blue);">
+                        <strong style="color: var(--primary-blue); font-size: 18px;">Conocimiento del Mercado</strong>
+                        <p style="margin-top: 15px; line-height: 1.6;">
+                            Análisis detallado de las necesidades locales y identificación 
+                            precisa de oportunidades de negocio.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="impact-grid">
+                <div class="impact-card">
+                    <div class="impact-icon">🎯</div>
+                    <h3 style="color: var(--primary-blue); margin-bottom: 15px; font-size: 20px;">
+                        Planificación Estratégica
+                    </h3>
+                    <p style="color: var(--text-light); line-height: 1.8;">
+                        Hemos desarrollado un plan integral que contempla desde la fase inicial 
+                        hasta la expansión completa, con métricas claras y objetivos medibles.
+                    </p>
+                </div>
+                <div class="impact-card">
+                    <div class="impact-icon">🤝</div>
+                    <h3 style="color: var(--primary-blue); margin-bottom: 15px; font-size: 20px;">
+                        Compromiso Local
+                    </h3>
+                    <p style="color: var(--text-light); line-height: 1.8;">
+                        Arraigo en La Rioja y compromiso de largo plazo con el desarrollo 
+                        regional y la generación de empleo de calidad.
+                    </p>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <h3 style="color: var(--primary-blue); margin-bottom: 30px; text-align: center; font-size: 24px;">Equipo Fundador</h3>
+                <div style="display: flex; justify-content: center; gap: 60px; flex-wrap: wrap;">
+                    <div style="text-align: center; max-width: 300px;">
+                        <div style="width: 100px; height: 100px; background: var(--primary-blue); border-radius: 50%; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; font-size: 40px; color: white;">👩‍💼</div>
+                        <h4 style="color: var(--primary-blue); font-size: 22px; margin-bottom: 10px;">
+                            Vanina Cáceres
+                        </h4>
+                        <p style="color: var(--primary-orange); font-weight: bold; margin-bottom: 15px;">
+                            Co-Fundadora
+                        </p>
+                        <p style="color: var(--text-light); line-height: 1.6;">
+                            Experiencia en gestión empresarial y desarrollo de proyectos 
+                            con impacto social en la región.
+                        </p>
+                    </div>
+                    <div style="text-align: center; max-width: 300px;">
+                        <div style="width: 100px; height: 100px; background: var(--primary-orange); border-radius: 50%; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; font-size: 40px; color: white;">👨‍💻</div>
+                        <h4 style="color: var(--primary-blue); font-size: 22px; margin-bottom: 10px;">
+                            Guilherme Henrique
+                        </h4>
+                        <p style="color: var(--primary-orange); font-weight: bold; margin-bottom: 15px;">
+                            Co-Fundador
+                        </p>
+                        <p style="color: var(--text-light); line-height: 1.6;">
+                            Especialista en operaciones y tecnología, con enfoque 
+                            en eficiencia y calidad de servicios.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Proyección de Impacto -->
+        <section class="section section-dark">
+            <h2>Proyección de Impacto a 3 Años</h2>
+            <p class="section-subtitle">
+                Transformación cuantificable del panorama laboral y económico regional
+            </p>
+            
+            <div class="stats-modern">
+                <div class="glass-card">
+                    <div class="stat-number">200+</div>
+                    <div style="font-size: 18px; font-weight: 600; margin-bottom: 10px;">Empleos Formales Creados</div>
+                    <p style="opacity: 0.8;">Técnicos integrados al sistema laboral formal</p>
+                </div>
+                <div class="glass-card">
+                    <div class="stat-number">20K+</div>
+                    <div style="font-size: 18px; font-weight: 600; margin-bottom: 10px;">Servicios Prestados</div>
+                    <p style="opacity: 0.8;">Hogares y empresas atendidas profesionalmente</p>
+                </div>
+                <div class="glass-card">
+                    <div class="stat-number">45%</div>
+                    <div style="font-size: 18px; font-weight: 600; margin-bottom: 10px;">Reducción Desempleo Técnico</div>
+                    <p style="opacity: 0.8;">Al crear incentivos reales de capacitación</p>
+                </div>
+                <div class="glass-card">
+                    <div class="stat-number">1°</div>
+                    <div style="font-size: 18px; font-weight: 600; margin-bottom: 10px;">Empresa Líder Regional</div>
+                    <p style="opacity: 0.8;">En servicios técnicos profesionales</p>
+                </div>
+            </div>
+
+            <div style="background: rgba(255,255,255,0.05); border-radius: 15px; padding: 50px; margin-top: 50px; border: 1px solid rgba(255,255,255,0.1); position: relative;">
+                <div style="position: absolute; top: -20px; left: 50%; transform: translateX(-50%); background: var(--primary-orange); color: white; padding: 10px 30px; border-radius: 25px; font-size: 18px; font-weight: bold;">
+                    BENEFICIOS PARA LA RIOJA
+                </div>
+                <div style="padding-top: 20px;">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 40px; margin-top: 30px;">
+                        <div style="text-align: center; padding: 30px; background: rgba(255,255,255,0.08); border-radius: 15px; border: 2px solid var(--primary-blue); position: relative;">
+                            <div style="position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: var(--primary-blue); color: white; padding: 8px 20px; border-radius: 20px; font-size: 14px; font-weight: bold;">
+                                DESARROLLO ECONÓMICO
+                            </div>
+                            <div style="font-size: 60px; margin: 20px 0 15px 0;">🏗️</div>
+                            <h4 style="color: white; font-size: 20px; margin-bottom: 15px;">Nuevo Sector Económico</h4>
+                            <p style="opacity: 0.9; line-height: 1.6;">
+                                Consolidación del sector de servicios técnicos profesionales como motor de desarrollo regional
+                            </p>
+                        </div>
+                        <div style="text-align: center; padding: 30px; background: rgba(255,255,255,0.08); border-radius: 15px; border: 2px solid var(--primary-orange); position: relative;">
+                            <div style="position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: var(--primary-orange); color: white; padding: 8px 20px; border-radius: 20px; font-size: 14px; font-weight: bold;">
+                                CALIDAD Y EXCELENCIA
+                            </div>
+                            <div style="font-size: 60px; margin: 20px 0 15px 0;">⭐</div>
+                            <h4 style="color: white; font-size: 20px; margin-bottom: 15px;">Referencia de Calidad</h4>
+                            <p style="opacity: 0.9; line-height: 1.6;">
+                                Establecimiento de nuevos estándares de profesionalismo en servicios técnicos
+                            </p>
+                        </div>
+                        <div style="text-align: center; padding: 30px; background: rgba(255,255,255,0.08); border-radius: 15px; border: 2px solid var(--primary-blue); position: relative;">
+                            <div style="position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: var(--primary-blue); color: white; padding: 8px 20px; border-radius: 20px; font-size: 14px; font-weight: bold;">
+                                LIDERAZGO REGIONAL
+                            </div>
+                            <div style="font-size: 60px; margin: 20px 0 15px 0;">🌍</div>
+                            <h4 style="color: white; font-size: 20px; margin-bottom: 15px;">Modelo Replicable</h4>
+                            <p style="opacity: 0.9; line-height: 1.6;">
+                                Experiencia exportable a otras regiones, posicionando a La Rioja como líder en innovación social empresarial
+                            </p>
+                        </div>
+                        <div style="text-align: center; padding: 30px; background: rgba(255,255,255,0.08); border-radius: 15px; border: 2px solid var(--primary-orange); position: relative;">
+                            <div style="position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: var(--primary-orange); color: white; padding: 8px 20px; border-radius: 20px; font-size: 14px; font-weight: bold;">
+                                INCLUSIÓN SOCIAL
+                            </div>
+                            <div style="font-size: 60px; margin: 20px 0 15px 0;">👨‍👩‍👧‍👦</div>
+                            <h4 style="color: white; font-size: 20px; margin-bottom: 15px;">Empleos para Jóvenes</h4>
+                            <p style="opacity: 0.9; line-height: 1.6;">
+                                Oportunidades para jóvenes que no estudian ni trabajan, generando una fuente de renta adicional para las familias riojanas
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Final -->
+        <div style="background: linear-gradient(135deg, var(--primary-blue) 0%, #004499 100%); color: white; padding: 100px 40px; text-align: center; border-radius: 25px; margin: 60px 0; position: relative; overflow: hidden;">
+            <!-- Efecto de brillo sutil -->
+            <div style="position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent); animation: shine 4s infinite;"></div>
+            
+            <div style="position: relative; z-index: 2; max-width: 900px; margin: 0 auto;">
+                <!-- Ícono destacado -->
+                <div style="width: 100px; height: 100px; background: rgba(255,255,255,0.15); border-radius: 50%; margin: 0 auto 40px; display: flex; align-items: center; justify-content: center; font-size: 48px; backdrop-filter: blur(10px); border: 2px solid rgba(255,255,255,0.2);">
+                    🤝
+                </div>
+                
+                <!-- Título principal -->
+                <h2 style="font-size: 48px; margin-bottom: 30px; color: white; font-weight: 800; line-height: 1.2;">
+                    Servicios Ya representa una oportunidad única
+                </h2>
+                
+                <!-- Subtítulo destacado -->
+                <div style="background: rgba(255,107,53,0.9); color: white; padding: 20px 40px; border-radius: 50px; display: inline-block; margin-bottom: 30px; font-size: 22px; font-weight: bold;">
+                    Impacto Social Inmediato
+                </div>
+                
+                <!-- Descripción principal -->
+                <p style="font-size: 24px; margin-bottom: 40px; line-height: 1.6; opacity: 0.95;">
+                    A través de la creación de empleos formales y aprovechando<br>
+                    el momento ideal del mercado riojano para transformar vidas
+                </p>
+                
+                <!-- Call to action grande -->
+                <h3 style="font-size: 42px; margin: 40px 0; color: white; font-weight: 900; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">
+                    CONSTRUYAMOS EL FUTURO JUNTOS
+                </h3>
+                
+                <!-- Descripción de beneficio -->
+                <p style="font-size: 20px; margin-bottom: 50px; opacity: 0.9; line-height: 1.6;">
+                    Con su apoyo estratégico, transformaremos una necesidad del mercado<br>
+                    en una oportunidad de desarrollo social y económico para toda La Rioja
+                </p>
+                
+                <!-- Botón CTA mejorado -->
+                <a href="#" style="display: inline-block; padding: 25px 60px; background: linear-gradient(135deg, var(--primary-orange), #ff8355); color: white; text-decoration: none; border-radius: 50px; font-size: 20px; font-weight: bold; margin-top: 20px; transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); position: relative; z-index: 1; box-shadow: 0 15px 35px rgba(255,107,53,0.4); text-transform: uppercase; letter-spacing: 1px;" onmouseover="this.style.transform='translateY(-8px) scale(1.05)'; this.style.boxShadow='0 25px 50px rgba(255,107,53,0.6)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 15px 35px rgba(255,107,53,0.4)'">
+                    🚀 Apoyar el Desarrollo Regional
+                </a>
+                
+                <!-- Información adicional -->
+                <div style="margin-top: 40px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.2);">
+                    <p style="font-size: 16px; opacity: 0.8; line-height: 1.5;">
+                        Una inversión en el futuro de La Rioja • Generación de empleo formal • Innovación social empresarial
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div style="text-align: center; padding: 60px 20px; background: #1a1a1a; color: white; margin-top: 60px; border-radius: 20px;">
+            <h3 style="font-size: 32px; margin-bottom: 20px; color: var(--primary-orange);">SERVICIOS YA</h3>
+            <p style="font-size: 18px; opacity: 0.8; margin-bottom: 30px;">
+                Generación de Empleo • Desarrollo Regional • Innovación Social
+            </p>
+            <p style="opacity: 0.6;">La Rioja 2025 • Fundadores: Vanina Cáceres & Guilherme Henrique</p>
+            <p style="opacity: 0.6; margin-top: 10px; font-style: italic;">
+                "Calidad, Confianza y Agilidad en un solo lugar"
+            </p>
+        </div>
+
+    </div>
+
+    <script>
+        // Observador de intersección para animaciones al scroll
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, observerOptions);
+
+        // Animación de números
+        const animateValue = (element, start, end, duration) => {
+            const range = end - start;
+            const increment = range / (duration / 16);
+            let current = start;
+            
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= end) {
+                    current = end;
+                    clearInterval(timer);
+                }
+                
+                const suffix = element.textContent.match(/[%KM+°]+$/)?.[0] || '';
+                element.textContent = Math.floor(current) + suffix;
+            }, 16);
+        };
+
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', () => {
+            // Observar todas las secciones
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // Observar elementos individuales adicionales
+            const additionalElements = document.querySelectorAll('.highlight-box');
+            additionalElements.forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'scale(0.95)';
+                el.style.transition = 'all 0.8s ease';
+                observer.observe(el);
+            });
+
+            // Animación de números específica
+            const numberObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !entry.target.classList.contains('animated')) {
+                        entry.target.classList.add('animated');
+                        const text = entry.target.textContent;
+                        const value = parseInt(text.replace(/[^0-9]/g, ''));
+                        if (!isNaN(value)) {
+                            animateValue(entry.target, 0, value, 2000);
+                        }
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            document.querySelectorAll('.stat-number').forEach(num => {
+                numberObserver.observe(num);
+            });
+
+            // Efecto parallax sutil
+            let ticking = false;
+            function updateParallax() {
+                const scrolled = window.pageYOffset;
+                const hero = document.querySelector('.hero');
+                
+                if (hero && scrolled < window.innerHeight) {
+                    hero.style.transform = `translateY(${scrolled * 0.3}px)`;
+                }
+                
+                // Parallax sutil en elementos
+                document.querySelectorAll('.parallax-element').forEach((el, index) => {
+                    const speed = 0.05 + (index * 0.02);
+                    const yPos = -(scrolled * speed);
+                    el.style.transform = `translateY(${yPos}px)`;
+                });
+                
+                ticking = false;
+            }
+
+            function requestTick() {
+                if (!ticking) {
+                    requestAnimationFrame(updateParallax);
+                    ticking = true;
+                }
+            }
+
+            window.addEventListener('scroll', requestTick);
+
+            // Animación del highlight-box cuando entra en viewport
+            const highlightObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'scale(1)';
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.highlight-box').forEach(box => {
+                highlightObserver.observe(box);
+            });
+        });
+    </script>
+
+</body>
+</html>
